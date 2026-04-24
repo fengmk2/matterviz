@@ -48,6 +48,7 @@
     get_energy_per_atom,
     get_min_entries_and_el_refs,
     get_ternary_combinations,
+    get_visible_domain_labels,
     pad_domain_points,
     scale_to_font_range,
   } from './compute'
@@ -1040,6 +1041,34 @@
     }
     color_attr.needsUpdate = true
     return geom
+  })
+
+  const visible_domain_labels = $derived.by(() => {
+    if (!hull_base_geometry || face_domain_map.length === 0) {
+      return render_domains.map((domain) => ({
+        formula: domain.formula,
+        position: swiz(domain.ann_loc[0], domain.ann_loc[1], domain.ann_loc[2]),
+        label_font_size: domain.label_font_size,
+      }))
+    }
+
+    const pos = hull_base_geometry.getAttribute(`position`)
+    const pinned_labels = render_domains
+      .filter((domain) => domain.is_draw_formula)
+      .map((domain) => ({
+        formula: domain.formula,
+        position: swiz(domain.ann_loc[0], domain.ann_loc[1], domain.ann_loc[2]),
+        label_font_size: domain.label_font_size,
+      }))
+    const font_size_by_formula = new SvelteMap(
+      render_domains.map((domain) => [domain.formula, domain.label_font_size]),
+    )
+    return get_visible_domain_labels(
+      pos.array,
+      face_domain_map,
+      font_size_by_formula,
+      pinned_labels,
+    )
   })
 
   $effect(() => {
@@ -2705,9 +2734,9 @@
 
         <!-- Domain labels -->
         {#if label_stable}
-          {#each render_domains as domain (domain.formula)}
+          {#each visible_domain_labels as domain (domain.formula)}
             <extras.HTML
-              position={swiz(domain.ann_loc[0], domain.ann_loc[1], domain.ann_loc[2])}
+              position={domain.position}
               center
               portal={wrapper}
               zIndexRange={[5, 5]}

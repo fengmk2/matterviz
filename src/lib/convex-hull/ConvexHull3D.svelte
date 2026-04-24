@@ -26,7 +26,6 @@
   import { Canvas, T } from '@threlte/core'
   import * as extras from '@threlte/extras'
   import { ticks } from 'd3-array'
-  import { SvelteMap } from 'svelte/reactivity'
   import { PerspectiveCamera, WebGLRenderer } from 'three'
   import type { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
   import {
@@ -1024,34 +1023,22 @@
   function draw_hull_labels(): void {
     if (!ctx || !merged_config.show_labels) return
 
-    const composition_map = new SvelteMap<string, ConvexHullEntry>()
-    for (const entry of plot_entries) {
-      if (!entry.visible || entry.is_element) continue
-      const comp_key = Object.entries(entry.composition)
-        .filter(([, amt]) => amt > 0)
-        .sort(([a], [b]) => a.localeCompare(b))
-        .map(([el, amt]) => `${el}${amt.toFixed(3)}`)
-        .join(``)
-      const existing = composition_map.get(comp_key)
-      if (
-        !existing || (entry.e_form_per_atom ?? 0) < (existing.e_form_per_atom ?? 0)
-      ) {
-        composition_map.set(comp_key, entry)
-      }
-    }
-
     ctx.fillStyle = text_color
     ctx.font = `12px Arial`
     ctx.textAlign = `center`
     ctx.textBaseline = `top`
 
-    for (const entry of composition_map.values()) {
-      const is_stable_point = entry.is_stable || (entry.e_above_hull ?? 0) <= 1e-6
-      const can_label = (is_stable_point && show_stable_labels) ||
-        (!is_stable_point && show_unstable_labels &&
-          (entry.e_above_hull ?? 0) <= max_hull_dist_show_labels)
-      if (!can_label) continue
+    const label_entries = helpers.get_composition_label_entries(
+      plot_entries.filter((entry) => {
+        if (!entry.visible || entry.is_element) return false
+        const is_stable_point = entry.is_stable || (entry.e_above_hull ?? 0) <= 1e-6
+        return (is_stable_point && show_stable_labels) ||
+          (!is_stable_point && show_unstable_labels &&
+            (entry.e_above_hull ?? 0) <= max_hull_dist_show_labels)
+      }),
+    )
 
+    for (const entry of label_entries) {
       const projected = project_3d_point(entry.x, entry.y, entry.z)
       const formula = helpers.get_entry_label(entry, elements)
       ctx.fillText(formula, projected.x, projected.y + 16 * canvas_dims.scale)
