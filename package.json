@@ -209,16 +209,16 @@
     "svelte": "5.55.5",
     "svelte-check-rs": "0.9.7",
     "typescript": "6.0.3",
-    "vite": "npm:@voidzero-dev/vite-plus-core@^0.1.20",
-    "vite-plus": "latest",
-    "vitest": "npm:@voidzero-dev/vite-plus-test@^0.1.20"
+    "vite": "npm:@voidzero-dev/vite-plus-core@0.1.21-alpha.7",
+    "vite-plus": "0.1.21-alpha.7",
+    "vitest": "npm:@voidzero-dev/vite-plus-test@0.1.21-alpha.7"
   },
   "peerDependencies": {
     "svelte": "^5.0.0"
   },
   "overrides": {
-    "vite": "npm:@voidzero-dev/vite-plus-core@^0.1.20",
-    "vitest": "npm:@voidzero-dev/vite-plus-test@^0.1.20"
+    "vite": "npm:@voidzero-dev/vite-plus-core@0.1.21-alpha.7",
+    "vitest": "npm:@voidzero-dev/vite-plus-test@0.1.21-alpha.7"
   },
   "engines": {
     "node": ">=24"
