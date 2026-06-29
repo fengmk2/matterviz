@@ -1,4 +1,4 @@
-import type { Plugin } from 'vite'
+import type { Plugin } from 'vite-plus'
 
 export const mock_vscode = (): Plugin => ({
   name: `vscode-mock`,

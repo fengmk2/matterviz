@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs'
 import { gunzipSync } from 'node:zlib'
-import type { Plugin } from 'vite'
+import type { Plugin } from 'vite-plus'
 
 // Vite plugin that transparently imports .json.gz files as ES modules
 export function vite_plugin_json_gz(): Plugin {

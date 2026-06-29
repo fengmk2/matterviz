@@ -1,6 +1,6 @@
 // @vitest-environment happy-dom
 import { flushSync } from 'svelte'
-import { describe, expect, test, vi } from 'vitest'
+import { describe, expect, test, vi } from 'vite-plus/test'
 import { MockModel } from './anywidget-mock-model'
 import { latest_stub, reset_stub } from './reactive-renderer-registry'
 
@@ -356,7 +356,7 @@ describe(`render() lifecycle`, () => {
     const dispose = anywidget_module.default.render({
       model: as_model(model),
       el,
-    } as unknown as RenderArg) as () => void
+    } as unknown) as () => void
     flushSync()
     expect(listener_count()).toBeGreaterThan(0) // drive listeners registered
 

@@ -356,9 +356,11 @@
   {#if series.length > 0 || surfaces.length > 0}
     <div class="data-summary">
       {#if series.length > 0}
-        <span>{series.length} series · {
-            series.reduce((sum, srs) => sum + srs.x.length, 0).toLocaleString()
-          } points</span>
+        <span
+          >{series.length} series · {series
+            .reduce((sum, srs) => sum + srs.x.length, 0)
+            .toLocaleString()} points</span
+        >
       {/if}
       {#if surfaces.length > 0}
         <span>{surfaces.length} {surfaces.length === 1 ? `surface` : `surfaces`}</span>
