@@ -95,7 +95,11 @@
       id: elements.join(``),
       sites,
       lattice: {
-        matrix: [[lattice_a, 0, 0], [0, lattice_a, 0], [0, 0, lattice_a]],
+        matrix: [
+          [lattice_a, 0, 0],
+          [0, lattice_a, 0],
+          [0, 0, lattice_a],
+        ],
         pbc: [true, true, true],
         volume: lattice_a ** 3,
         a: lattice_a,
@@ -182,7 +186,7 @@
         })
       }
       const { family: id, family: label, color } = config
-      return { id, label, color, x, y, size_values, point_ids, metadata, }
+      return { id, label, color, x, y, size_values, point_ids, metadata }
     })
 
   const series = make_series()
@@ -198,7 +202,6 @@
       y: payload.event.clientY - rect.top,
     }
   }
-
 </script>
 
 {#snippet point_tooltip(payload: BinnedPointPayload<MaterialPoint>)}
@@ -220,9 +223,9 @@
   <header>
     <h1>Binned Scatter Plot</h1>
     <p>
-      Dense scatter rendering with adaptive density bins, point picking, size scaling,
-      a structure popup on material clicks, and per-family marginal distributions
-      (top histogram + right KDE) that track zoom/pan.
+      Dense scatter rendering with adaptive density bins, point picking, size scaling, a
+      structure popup on material clicks, and per-family marginal distributions (top histogram
+      + right KDE) that track zoom/pan.
     </p>
   </header>
 

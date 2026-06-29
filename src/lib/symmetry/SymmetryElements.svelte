@@ -151,9 +151,9 @@ color/opacity instead of one mesh per element) and disposed on change/unmount. -
   const axis_groups: MaterialGroup[] = $derived.by(() => {
     const axis_elements = elements.filter(
       (elem) =>
-        (elem.kind === `rotation` || elem.kind === `screw` ||
-          elem.kind === `rotoinversion`) &&
-        show_kinds[elem.kind] && elem.axis,
+        (elem.kind === `rotation` || elem.kind === `screw` || elem.kind === `rotoinversion`) &&
+        show_kinds[elem.kind] &&
+        elem.axis,
     )
     // Drop 2-fold axes coincident with a higher-order axis (4 contains 2, 6 contains
     // 2 and 3, -4 contains 2, …) to reduce visual clutter. Computed over the VISIBLE
@@ -167,9 +167,8 @@ color/opacity instead of one mesh per element) and disposed on change/unmount. -
 
     const parts_by_group = new Map<string, BufferGeometry[]>()
     for (const elem of axis_elements) {
-      if (
-        hide_redundant_axes && elem.order < (max_order_by_line.get(line_key(elem)) ?? 0)
-      ) continue
+      if (hide_redundant_axes && elem.order < (max_order_by_line.get(line_key(elem)) ?? 0))
+        continue
       const clipped = clip_line_to_cell(elem.point, elem.axis as Vec3, lattice)
       if (!clipped) continue
       const [start, end] = clipped

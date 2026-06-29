@@ -1,4 +1,4 @@
-/// <reference types="vite/client" />
+/// <reference types="vite-plus/client" />
 
 // Build-time component discovery using Vite's import.meta.glob.
 // This pulls in ALL .svelte files shipped by matterviz under dist/.

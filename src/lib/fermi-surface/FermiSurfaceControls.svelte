@@ -90,8 +90,8 @@
   let available_bands = $derived(
     fermi_data
       ? [...new Set(fermi_data.isosurfaces.map((iso) => iso.band_index))].toSorted(
-        (a, b) => a - b,
-      )
+          (a, b) => a - b,
+        )
       : [],
   )
   let available_bands_key = $derived(available_bands.join(`,`))
@@ -147,14 +147,7 @@
   >
     <label>
       <span>μ offset (eV):</span>
-      <input
-        type="range"
-        min="-1"
-        max="1"
-        step="0.01"
-        value={mu}
-        oninput={handle_mu_change}
-      />
+      <input type="range" min="-1" max="1" step="0.01" value={mu} oninput={handle_mu_change} />
       <input
         type="number"
         step="0.01"
@@ -300,13 +293,7 @@
       </label>
       <label>
         <span>Position:</span>
-        <input
-          type="range"
-          min="-1"
-          max="1"
-          step="0.01"
-          bind:value={clip_position}
-        />
+        <input type="range" min="-1" max="1" step="0.01" bind:value={clip_position} />
         <span class="value">{clip_position.toFixed(2)}</span>
       </label>
       <label>
