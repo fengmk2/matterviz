@@ -124,9 +124,15 @@ importers:
       '@types/d3-time-format':
         specifier: ^4.0.3
         version: 4.0.3
+      '@types/node':
+        specifier: ^26.0.1
+        version: 26.0.1
       '@types/three':
         specifier: ^0.184.1
         version: 0.184.1
+      '@types/vscode':
+        specifier: ^1.125.0
+        version: 1.125.0
       '@vitest/coverage-v8':
         specifier: 4.1.9
         version: 4.1.9(@vitest/browser@4.1.9)(vitest@4.1.9)
@@ -943,6 +949,9 @@ packages:
 
   '@types/unist@3.0.3':
     resolution: {integrity: sha512-ko/gIFJRv177XgZsZcBwnqJN5x/Gien8qNOn0D5bQU/zAzVf9Zt3BlcUiLqhV9y4ARk0GbT3tnUiPNgnTXzc/Q==, tarball: https://registry.npmjs.org/@types/unist/-/unist-3.0.3.tgz}
+
+  '@types/vscode@1.125.0':
+    resolution: {integrity: sha512-0icm/ZQAaism87P0ekHqi4/Ju9du+Tm0RUW+y7vqRsxY2cY0FNRX1nAnaW7nT6npPt2tfHiheZ55Zm9UhqonFA==, tarball: https://registry.npmjs.org/@types/vscode/-/vscode-1.125.0.tgz}
 
   '@types/webxr@0.5.24':
     resolution: {integrity: sha512-h8fgEd/DpoS9CBrjEQXR+dIDraopAEfu4wYVNY2tEPwk60stPWhvZMf4Foo5FakuQ7HFZoa8WceaWFervK2Ovg==, tarball: https://registry.npmjs.org/@types/webxr/-/webxr-0.5.24.tgz}
@@ -2526,6 +2535,8 @@ snapshots:
   '@types/unist@2.0.11': {}
 
   '@types/unist@3.0.3': {}
+
+  '@types/vscode@1.125.0': {}
 
   '@types/webxr@0.5.24': {}
 
